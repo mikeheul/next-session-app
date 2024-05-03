@@ -1,0 +1,119 @@
+datasource db {
+    provider = "mysql"
+    url      = env("DATABASE_URL")
+    relationMode = "foreignKeys"
+}
+
+generator client {
+    provider = "prisma-client-js"
+    previewFeatures = ["fullTextSearch", "fullTextIndex"]
+}
+
+model Training {
+    id String @id @default(uuid())
+    name String @unique
+
+    sessions Session[]
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+model Trainer {
+    id String @id @default(uuid())
+    firstName String 
+    lastName String
+    email String @unique
+    phoneNumber String
+
+    sessions Session[]
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+model Trainee {
+    id String @id @default(uuid())
+    firstName String 
+    lastName String
+    email String @unique
+    phoneNumber String
+
+    sessions SessionsTrainees[]
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+model Session {
+    id String @id @default(uuid())
+    name String
+    startDate DateTime @default(now())
+    endDate DateTime @default(now())
+    places Int @default(1)
+
+    trainingId String
+    training Training @relation(fields: [trainingId], references: [id], onDelete: Cascade)
+
+    trainees SessionsTrainees[]
+
+    trainerId String
+    trainer Trainer @relation(fields: [trainerId], references: [id], onDelete: Cascade)
+    
+    programmes Programme[]
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+model Category {
+    id String @id @default(uuid())
+    name String @unique
+
+    courses Course[]
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+model Course {
+    id String @id @default(uuid())
+    name String @unique
+
+    categoryId String
+    category Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+    programmes Programme[]
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+model Programme {
+    id String @id @default(uuid())
+    duration Int @default(1)
+    
+    sessionId String
+    session Session @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+    courseId String
+    course Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+model SessionsTrainees {
+
+    id String @id @default(uuid())
+
+    sessionId String
+    session Session @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+    traineeId String
+    trainee Trainee @relation(fields: [traineeId], references: [id], onDelete: Cascade)
+
+}
+
+// npx prisma generate
+// npx prisma db push
