@@ -93,7 +93,7 @@ const SessionPage = async ({ params }: { params: { sessionId: string } }) => {
                         ))}
                         </>
                     ) : (
-                        <p className="text-sm text-slate-400">No trainees</p>
+                        <p className="text-sm text-slate-400">No trainees found</p>
                     )}
                 </Frame>
 
@@ -117,7 +117,7 @@ const SessionPage = async ({ params }: { params: { sessionId: string } }) => {
                             ))}
                             </>
                         ) : (
-                            <p className="text-sm text-slate-400">No trainees available</p>
+                            <p className="text-sm text-slate-400">No trainees found</p>
                         )}
                         </>
                     ) : (
