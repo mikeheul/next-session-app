@@ -4,6 +4,7 @@ import UnsubscribeButton from "./_components/UnsubscribeButton";
 import SubscribeButton from "./_components/SubscribeButton";
 import Banner from "@/components/Banner";
 import Frame from "./_components/Frame";
+import FrameRow from "./_components/FrameRow";
 
 const SessionPage = async ({ params }: { params: { sessionId: string } }) => {
     
@@ -73,48 +74,59 @@ const SessionPage = async ({ params }: { params: { sessionId: string } }) => {
                 <p>Trainer : {`${session.trainer.firstName} ${session.trainer.lastName}`}</p>
             </div>
 
-            <div className="flex flex-col gap-x-2 md:flex-row my-5">
-
+            <FrameRow>
                 <Frame
                     label="Registered Trainees"
                 >
-                    {session.trainees.map((subscription) => (
-                        <div className="flex flex-col xs:flex-row gap-y-2 items-center" key={subscription.id}>
-                            {subscription && (
-                                <UnsubscribeButton 
-                                    traineeId={subscription.trainee.id}
-                                    sessionId={subscription.sessionId}
-                                />
-                            )}
-                            <p>{`${subscription.trainee.firstName} ${subscription.trainee.lastName}`}</p>
-                        </div>
-                    ))}
+                    {session.trainees.length > 0 ? (
+                        <>
+                        {session.trainees.map((subscription) => (
+                            <div className="flex flex-col xs:flex-row gap-y-2 items-center" key={subscription.id}>
+                                {subscription && (
+                                    <UnsubscribeButton 
+                                        traineeId={subscription.trainee.id}
+                                        sessionId={subscription.sessionId}
+                                    />
+                                )}
+                                <p>{`${subscription.trainee.firstName} ${subscription.trainee.lastName}`}</p>
+                            </div>
+                        ))}
+                        </>
+                    ) : (
+                        <p className="text-sm text-slate-400">No trainees</p>
+                    )}
                 </Frame>
 
                 <Frame
                     label="Not Registered Trainees"
                 >
-                    {traineesNotInSession.map((trainee) => (
-                        <div className="flex flex-col xs:flex-row gap-y-2 items-center" key={trainee.id}>
-                            {session.places > session.trainees.length ? (
-                                <>
-                                    <SubscribeButton 
-                                        traineeId={trainee.id}
-                                        sessionId={session.id}
+                    {traineesNotInSession.length > 0 ? (
+                        <>
+                        {traineesNotInSession.map((trainee) => (
+                            <div className="flex flex-col xs:flex-row gap-y-2 items-center" key={trainee.id}>
+                                {session.places > session.trainees.length ? (
+                                    <>
+                                        <SubscribeButton 
+                                            traineeId={trainee.id}
+                                            sessionId={session.id}
+                                        />
+                                        <p>{`${trainee.firstName} ${trainee.lastName}`}</p>
+                                    </>
+                                ) : (
+                                    <Banner 
+                                        label="No places available. Session complete !"
                                     />
-                                    <p>{`${trainee.firstName} ${trainee.lastName}`}</p>
-                                </>
-                            ) : (
-                                <Banner 
-                                    label="No places available. Session complete !"
-                                />
-                            )}
-                        </div>
-                    ))}
+                                )}
+                            </div>
+                        ))}
+                        </>
+                    ) : (
+                        <p className="text-sm text-slate-400">No trainees</p>
+                    )}
                 </Frame>
-            </div>
+            </FrameRow>
 
-            <div className="flex flex-col gap-x-2 md:flex-row my-5">
+            <FrameRow>
                 <Frame
                     label="Registered Courses"
                 >
@@ -130,7 +142,7 @@ const SessionPage = async ({ params }: { params: { sessionId: string } }) => {
                         <div key={course.id}>{course.name}</div>
                     ))}
                 </Frame>
-            </div>
+            </FrameRow>
         </>
     );
 }
