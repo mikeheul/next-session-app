@@ -49,7 +49,7 @@ const SessionCollection = ({
                             <Badge className="bg-red-500 text-white">Full</Badge>
                         ) : (
                             session.places - session._count["trainees"] === 1 && (
-                                <Badge className="bg-red-500 text-white">1 place remaining</Badge>    
+                                <Badge className="bg-sky-500 text-white">1 place</Badge>    
                             )
                         )}
                         </TableCell>
