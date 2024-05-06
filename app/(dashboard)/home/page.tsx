@@ -1,5 +1,6 @@
 import { db } from "@/lib/db";
 import Link from "next/link";
+import SessionCollection from "../trainings/[trainingId]/_components/SessionCollection";
 
 const Home = async () => {
 
@@ -34,37 +35,28 @@ const Home = async () => {
 
     return (
         <div className="flex flex-col">
-            <h1 className="text-4xl font-bold mb-10">Homepage</h1>
+            <h1 className="text-2xl font-bold my-5">Homepage</h1>
             
             <div className="mb-6">
                 <h2 className="py-2 px-4 bg-slate-200 dark:bg-slate-800 rounded-lg text-2xl font-semibold my-5">Active Sessions</h2>
-                <div className="flex flex-col px-4">
-                    {activeSessions.map((session) => (
-                        <Link href={`/sessions/${session.id}`} key={session.id}>
-                            {session.name}
-                        </Link>
-                    ))}
-                </div>
+                <SessionCollection
+                    sessions={activeSessions}
+                    home
+                />
             </div>
             <div className="mb-6">
                 <h2 className="py-2 px-4 bg-slate-200 dark:bg-slate-800 rounded-lg text-2xl font-semibold my-5">Future Sessions</h2>
-                <div className="flex flex-col px-4">
-                    {futureSessions.map((session) => (
-                        <Link href={`/sessions/${session.id}`} key={session.id}>
-                            {session.name}
-                        </Link>
-                    ))}
-                </div>
+                <SessionCollection
+                    sessions={futureSessions}
+                    home
+                />
             </div>
             <div className="mb-6">
                 <h2 className="py-2 px-4 bg-slate-200 dark:bg-slate-800 rounded-lg text-2xl font-semibold my-5">Past Sessions</h2>
-                <div className="flex flex-col px-4">
-                    {passedSessions.map((session) => (
-                        <Link href={`/sessions/${session.id}`} key={session.id}>
-                            {session.name}
-                        </Link>
-                    ))}
-                </div>
+                <SessionCollection
+                    sessions={passedSessions}
+                    home
+                />
             </div>
         </div>
     );

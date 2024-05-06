@@ -41,6 +41,7 @@ const TrainingPage = async ({ params }: { params: { trainingId: string } }) => {
             <div className="flex flex-col gap-y-2">
                 <SessionCollection
                     sessions={sessions}
+                    home={false}
                 />
             </div>
         </div>

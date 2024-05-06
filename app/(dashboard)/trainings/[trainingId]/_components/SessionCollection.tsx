@@ -11,15 +11,16 @@ import {
     TableRow,
 } from "@/components/ui/table"
 import { formatDateTime } from "@/lib/format-datetime";
-import { Session } from "@prisma/client";
 import { useRouter } from "next/navigation";
 
 interface SessionCollectionProps {
-    sessions: any[]
+    sessions: any[],
+    home: boolean
 }
 
 const SessionCollection = ({
-    sessions
+    sessions,
+    home
 }: SessionCollectionProps) => {
 
     const router = useRouter()
@@ -34,7 +35,9 @@ const SessionCollection = ({
                         <TableHead>Start Date</TableHead>
                         <TableHead>End Date</TableHead>
                         <TableHead>Places</TableHead>
-                        <TableHead>Status</TableHead>
+                        {!home && (
+                            <TableHead>Status</TableHead>
+                        )}
                     </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -44,15 +47,17 @@ const SessionCollection = ({
                         <TableCell>{formatDateTime(session.startDate)}</TableCell>
                         <TableCell>{formatDateTime(session.endDate)}</TableCell>
                         <TableCell>{session.places}</TableCell>
-                        <TableCell>
-                        {session.places === session._count["trainees"] ? (
-                            <Badge className="bg-red-500 text-white">Full</Badge>
-                        ) : (
-                            session.places - session._count["trainees"] === 1 && (
-                                <Badge className="bg-sky-500 text-white">1 place</Badge>    
-                            )
+                        {!home && (
+                            <TableCell>
+                            {session.places === session._count["trainees"] ? (
+                                <Badge className="bg-red-500 text-white">Full</Badge>
+                            ) : (
+                                session.places - session._count["trainees"] === 1 && (
+                                    <Badge className="bg-sky-500 text-white">1 place</Badge>    
+                                )
+                            )}
+                            </TableCell>
                         )}
-                        </TableCell>
                     </TableRow>
                 ))}
                 </TableBody>
