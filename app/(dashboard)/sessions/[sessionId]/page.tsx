@@ -69,14 +69,14 @@ const SessionPage = async ({ params }: { params: { sessionId: string } }) => {
     return (
         <>
             <Link href={`/trainings/${session.trainingId}`}>
-                <Button>
+                <Button className="dark:bg-slate-600 dark:hover:bg-slate-600/90 dark:text-white">
                     <ChevronLeftIcon />
                     Back
                 </Button>
             </Link>
 
             <h1 className="text-2xl font-extrabold my-5">{session.name}</h1> 
-            <div className="bg-slate-200 p-6 rounded-md">
+            <div className="bg-slate-200 p-6 rounded-md dark:text-slate-200 dark:bg-slate-900">
                 <p>Start Date : {formatDateTime(session.startDate)}</p>
                 <p>End Date : {formatDateTime(session.endDate)}</p>
                 <p>Places : {session.places} places</p>

@@ -26,7 +26,7 @@ const TrainingPage = async ({ params }: { params: { trainingId: string } }) => {
     return (
         <div>
             <Link href={`/trainings/`}>
-                <Button>
+                <Button className="dark:bg-slate-600 dark:hover:bg-slate-600/90 dark:text-white">
                     <ChevronLeftIcon />
                     Back
                 </Button>

@@ -31,7 +31,7 @@ const TrainingCollection = ({
             </TableHeader>
             <TableBody>
                 {trainings.map((training) => (
-                    <TableRow className="cursor-pointer hover:bg-slate-100" onClick={() => { router.push(`/trainings/${training.id}`) }} key={training.id}>
+                    <TableRow className="cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800" onClick={() => { router.push(`/trainings/${training.id}`) }} key={training.id}>
                         <TableCell className="font-medium">{training.name}</TableCell>
                         <TableCell>{training._count['sessions']}</TableCell>
                     </TableRow>

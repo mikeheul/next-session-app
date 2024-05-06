@@ -37,7 +37,7 @@ const SessionCollection = ({
                 </TableHeader>
                 <TableBody>
                 {sessions.map((session) => (
-                    <TableRow className="cursor-pointer hover:bg-slate-100" onClick={() => { router.push(`/sessions/${session.id}`) }} key={session.id}>
+                    <TableRow className="cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800" onClick={() => { router.push(`/sessions/${session.id}`) }} key={session.id}>
                         <TableCell className="font-medium">{session.name}</TableCell>
                         <TableCell>{formatDateTime(session.startDate)}</TableCell>
                         <TableCell>{formatDateTime(session.endDate)}</TableCell>
