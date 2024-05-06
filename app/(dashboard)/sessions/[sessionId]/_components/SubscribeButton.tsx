@@ -21,7 +21,16 @@ const SubscribeButton = ({
     const subscribe = async () => {
         try {
             await axios.post(`/api/session/${sessionId}/${traineeId}/subscribe`);
-            toast.success("Trainee subscribed !");
+            toast.success("Trainee subscribed !", {
+                style: {
+                    backgroundColor: '#5bd7d1',
+                    color: '#1a4c4a',
+                },
+                iconTheme: {
+                    primary: '#1a4c4a',
+                    secondary: '#FFFAEE',
+                },
+            });
             router.refresh();
         } catch (error) {
             toast.error("Something went wrong");
