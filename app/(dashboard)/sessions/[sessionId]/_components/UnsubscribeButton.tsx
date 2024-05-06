@@ -29,7 +29,7 @@ const UnsubscribeButton = ({
     }
 
     return (
-        <Button onClick={unsubscribe} className="mr-5 bg-red-500 hover:bg-red-500/90">
+        <Button onClick={unsubscribe} className="mr-5 bg-red-600 hover:bg-red-600/90">
             <UserRoundMinusIcon size={20} className="mr-2" /> 
             Unsubscribe
         </Button>

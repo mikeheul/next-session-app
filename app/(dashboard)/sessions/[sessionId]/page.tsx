@@ -3,6 +3,7 @@ import { formatDateTime } from "@/lib/format-datetime";
 import UnsubscribeButton from "./_components/UnsubscribeButton";
 import SubscribeButton from "./_components/SubscribeButton";
 import Banner from "@/components/Banner";
+import Frame from "./_components/Frame";
 
 const SessionPage = async ({ params }: { params: { sessionId: string } }) => {
     
@@ -72,10 +73,11 @@ const SessionPage = async ({ params }: { params: { sessionId: string } }) => {
                 <p>Trainer : {`${session.trainer.firstName} ${session.trainer.lastName}`}</p>
             </div>
 
-            <div className="flex flex-col md:flex-row my-5">
-                <div className="basis-2/4">
-                    <h2 className="text-xl my-4 font-semibold">Registered Trainees</h2>
-                    <div className="flex flex-col gap-y-2">
+            <div className="flex flex-col gap-x-2 md:flex-row my-5">
+
+                <Frame
+                    label="Registered Trainees"
+                >
                     {session.trainees.map((subscription) => (
                         <div className="flex flex-col xs:flex-row gap-y-2 items-center" key={subscription.id}>
                             {subscription && (
@@ -87,11 +89,11 @@ const SessionPage = async ({ params }: { params: { sessionId: string } }) => {
                             <p>{`${subscription.trainee.firstName} ${subscription.trainee.lastName}`}</p>
                         </div>
                     ))}
-                    </div>
-                </div>
-                <div className="basis-2/4">
-                    <h2 className="text-xl my-4 font-semibold">Not Registered Trainees</h2>
-                    <div className="flex flex-col gap-y-2">
+                </Frame>
+
+                <Frame
+                    label="Not Registered Trainees"
+                >
                     {traineesNotInSession.map((trainee) => (
                         <div className="flex flex-col xs:flex-row gap-y-2 items-center" key={trainee.id}>
                             {session.places > session.trainees.length ? (
@@ -109,24 +111,25 @@ const SessionPage = async ({ params }: { params: { sessionId: string } }) => {
                             )}
                         </div>
                     ))}
-                    </div>
-                </div>
-
+                </Frame>
             </div>
 
-            <div className="flex flex-col md:flex-row my-5">
-                <div className="basis-2/4">
-                    <h2 className="text-xl my-4 font-semibold">Registered Courses</h2>
+            <div className="flex flex-col gap-x-2 md:flex-row my-5">
+                <Frame
+                    label="Registered Courses"
+                >
                     {session.programmes.map((programme) => (
                         <div key={programme.course.id}>{programme.course.name} / {programme.duration} days</div>
-                    ))}    
-                </div>
-                <div className="basis-2/4">
-                    <h2 className="text-xl my-4 font-semibold">Not Registered Courses</h2>
+                    ))}
+                </Frame>
+                
+                <Frame
+                    label="Not Registered Courses"
+                >
                     {coursesNotInSession.map((course) => (
                         <div key={course.id}>{course.name}</div>
                     ))}
-                </div>
+                </Frame>
             </div>
         </>
     );
