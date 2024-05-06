@@ -1,18 +1,31 @@
 "use client"
 
 import { Button } from "@/components/ui/button";
+import axios from "axios";
 import { UserRoundMinusIcon } from "lucide-react";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 interface UnsubscribeButtonProps {
-    trainee: any;
+    traineeId: string;
+    sessionId: string;
 }
 
 const UnsubscribeButton = ({
-    trainee
+    traineeId,
+    sessionId
 }: UnsubscribeButtonProps) => {
 
-    const unsubscribe = () => {
-       alert(trainee);
+    const router = useRouter();
+
+    const unsubscribe = async () => {
+        try {
+            await axios.delete(`/api/session/${sessionId}/${traineeId}/unsubscribe`);
+            toast.success("Trainee unsubscribed !");
+            router.refresh();
+        } catch (error) {
+            toast.error("Something went wrong");
+        }
     }
 
     return (

@@ -113,6 +113,7 @@ model SessionsTrainees {
     traineeId String
     trainee Trainee @relation(fields: [traineeId], references: [id], onDelete: Cascade)
 
+    @@unique([sessionId, traineeId]) 
 }
 
 // npx prisma generate

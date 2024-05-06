@@ -1,8 +1,8 @@
-import { Button } from "@/components/ui/button";
 import { db } from "@/lib/db";
 import { formatDateTime } from "@/lib/format-datetime";
-import { UserRoundPlusIcon } from "lucide-react";
 import UnsubscribeButton from "./_components/UnsubscribeButton";
+import SubscribeButton from "./_components/SubscribeButton";
+import Banner from "@/components/Banner";
 
 const SessionPage = async ({ params }: { params: { sessionId: string } }) => {
     
@@ -68,6 +68,7 @@ const SessionPage = async ({ params }: { params: { sessionId: string } }) => {
                 <p>Start Date : {formatDateTime(session.startDate)}</p>
                 <p>End Date : {formatDateTime(session.endDate)}</p>
                 <p>Places : {session.places} places</p>
+                <p>Left : {session.places - session.trainees.length}</p>
                 <p>Trainer : {`${session.trainer.firstName} ${session.trainer.lastName}`}</p>
             </div>
 
@@ -75,14 +76,15 @@ const SessionPage = async ({ params }: { params: { sessionId: string } }) => {
                 <div className="basis-2/4">
                     <h2 className="text-xl my-4 font-semibold">Registered Trainees</h2>
                     <div className="flex flex-col gap-y-2">
-                    {session.trainees.map((trainee) => (
-                        <div className="flex flex-col xs:flex-row gap-y-2 items-center" key={trainee.trainee.id}>
-                            {trainee && (
+                    {session.trainees.map((subscription) => (
+                        <div className="flex flex-col xs:flex-row gap-y-2 items-center" key={subscription.id}>
+                            {subscription && (
                                 <UnsubscribeButton 
-                                    trainee={`${trainee.trainee.firstName} ${trainee.trainee.lastName}`}
+                                    traineeId={subscription.trainee.id}
+                                    sessionId={subscription.sessionId}
                                 />
                             )}
-                            <p>{`${trainee.trainee.firstName} ${trainee.trainee.lastName}`}</p>
+                            <p>{`${subscription.trainee.firstName} ${subscription.trainee.lastName}`}</p>
                         </div>
                     ))}
                     </div>
@@ -92,11 +94,19 @@ const SessionPage = async ({ params }: { params: { sessionId: string } }) => {
                     <div className="flex flex-col gap-y-2">
                     {traineesNotInSession.map((trainee) => (
                         <div className="flex flex-col xs:flex-row gap-y-2 items-center" key={trainee.id}>
-                            <Button className="mr-5 bg-green-800 hover:bg-green-800/90">
-                                <UserRoundPlusIcon size={20} className="mr-2" /> 
-                                Subscribe
-                            </Button>
-                            <p>{`${trainee.firstName} ${trainee.lastName}`}</p>
+                            {session.places > session.trainees.length ? (
+                                <>
+                                    <SubscribeButton 
+                                        traineeId={trainee.id}
+                                        sessionId={session.id}
+                                    />
+                                    <p>{`${trainee.firstName} ${trainee.lastName}`}</p>
+                                </>
+                            ) : (
+                                <Banner 
+                                    label="No places available. Session complete !"
+                                />
+                            )}
                         </div>
                     ))}
                     </div>
