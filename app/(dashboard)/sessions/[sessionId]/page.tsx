@@ -80,7 +80,7 @@ const SessionPage = async ({ params }: { params: { sessionId: string } }) => {
                 <p>Start Date : {formatDateTime(session.startDate)}</p>
                 <p>End Date : {formatDateTime(session.endDate)}</p>
                 <p>Places : {session.places} places</p>
-                <p>Left : {session.places - session.trainees.length}</p>
+                <p>Remaining : {session.places - session.trainees.length}</p>
                 <p>Trainer : {`${session.trainer.firstName} ${session.trainer.lastName}`}</p>
             </div>
 
