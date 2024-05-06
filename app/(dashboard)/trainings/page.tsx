@@ -25,10 +25,6 @@ const TrainingsPage = async () => {
         },
     });
 
-    console.log(trainings)
-
-    //trainings.sort((a, b) => b.sessions.length - a.sessions.length);
-
     if (!trainings) {
         throw new Error('Trainings not found');
     }
