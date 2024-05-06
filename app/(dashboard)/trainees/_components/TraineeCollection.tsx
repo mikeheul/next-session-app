@@ -31,7 +31,9 @@ const TraineeCollection = ({
             <TableBody>
                 {trainees.map((trainee) => (
                     <TableRow className="cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800" onClick={() => { router.push(`/trainees/${trainee.id}`) }} key={trainee.id}>
-                        <TableCell className="font-semibold">{` ${trainee.firstName} ${trainee.lastName}`}</TableCell>
+                        <TableCell className="font-semibold">
+                            {` ${trainee.firstName} ${trainee.lastName}`}
+                        </TableCell>
                     </TableRow>
                 ))}
             </TableBody>
