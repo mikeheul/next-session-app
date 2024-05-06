@@ -1,8 +1,14 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Poppins, Open_Sans } from "next/font/google";
 import "./globals.css";
+import ToastProvider from "@/components/providers/toaster-provider";
 
 const inter = Inter({ subsets: ["latin"] });
+const poppins = Poppins({ subsets: ["latin"], weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'] });
+const openSans = Open_Sans({
+  subsets: ['latin'],
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,7 +22,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={openSans.className}>
+        <ToastProvider />
         <main className="p-6">
           {children}
         </main>

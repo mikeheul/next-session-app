@@ -29,7 +29,7 @@ const SubscribeButton = ({
     }
 
     return (
-        <Button onClick={subscribe} className="mr-5 bg-green-800 hover:bg-green-800/90">
+        <Button onClick={subscribe} className="mr-0 xs:mr-5 bg-green-800 hover:bg-green-800/90">
             <UserRoundPlusIcon size={20} className="mr-2" /> 
             Subscribe
         </Button>

@@ -98,7 +98,7 @@ const SessionPage = async ({ params }: { params: { sessionId: string } }) => {
                                         sessionId={subscription.sessionId}
                                     />
                                 )}
-                                <p>{`${subscription.trainee.firstName} ${subscription.trainee.lastName}`}</p>
+                                <p className="text-center xs:text-left">{`${subscription.trainee.firstName} ${subscription.trainee.lastName}`}</p>
                             </div>
                         ))}
                         </>
@@ -121,7 +121,7 @@ const SessionPage = async ({ params }: { params: { sessionId: string } }) => {
                                             traineeId={trainee.id}
                                             sessionId={session.id}
                                         />
-                                        <p>{`${trainee.firstName} ${trainee.lastName}`}</p>
+                                        <p className="text-center xs:text-left">{`${trainee.firstName} ${trainee.lastName}`}</p>
                                     </>
                                 </div>
                             ))}
@@ -143,7 +143,12 @@ const SessionPage = async ({ params }: { params: { sessionId: string } }) => {
                     label="Registered Courses"
                 >
                     {session.programmes.map((programme) => (
-                        <div key={programme.course.id}>{programme.course.name} / {programme.duration} days</div>
+                        <div key={programme.id} className="flex flex-col xs:flex-row gap-y-2 items-center">
+                            <Button className="mr-0 xs:mr-5">
+                                Cancel
+                            </Button>
+                            <p className="text-center xs:text-left" key={programme.course.id}>{programme.course.name} / {programme.duration} days</p>
+                        </div>
                     ))}
                 </Frame>
                 
