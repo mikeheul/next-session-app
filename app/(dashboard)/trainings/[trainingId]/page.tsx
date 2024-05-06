@@ -16,6 +16,11 @@ const TrainingPage = async ({ params }: { params: { trainingId: string } }) => {
         where: {
             trainingId: params.trainingId
         },
+        include: {
+            _count: {
+                select: { trainees: true }
+            }
+        },
         orderBy: [
             {
                 startDate: 'asc'

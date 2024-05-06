@@ -1,6 +1,7 @@
 "use client";
 
 import Banner from "@/components/Banner";
+import { Badge } from "@/components/ui/badge";
 import {
     Table,
     TableBody,
@@ -14,7 +15,7 @@ import { Session } from "@prisma/client";
 import { useRouter } from "next/navigation";
 
 interface SessionCollectionProps {
-    sessions: Session[]
+    sessions: any[]
 }
 
 const SessionCollection = ({
@@ -33,6 +34,7 @@ const SessionCollection = ({
                         <TableHead>Start Date</TableHead>
                         <TableHead>End Date</TableHead>
                         <TableHead>Places</TableHead>
+                        <TableHead>Status</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -42,6 +44,15 @@ const SessionCollection = ({
                         <TableCell>{formatDateTime(session.startDate)}</TableCell>
                         <TableCell>{formatDateTime(session.endDate)}</TableCell>
                         <TableCell>{session.places}</TableCell>
+                        <TableCell>
+                        {session.places === session._count["trainees"] ? (
+                            <Badge className="bg-red-500 text-white">Full</Badge>
+                        ) : (
+                            session.places - session._count["trainees"] === 1 && (
+                                <Badge className="bg-red-500 text-white">1 place remaining</Badge>    
+                            )
+                        )}
+                        </TableCell>
                     </TableRow>
                 ))}
                 </TableBody>
