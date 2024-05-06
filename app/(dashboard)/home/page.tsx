@@ -13,7 +13,12 @@ const Home = async () => {
             startDate: {
                 gt: now
             }
-        }
+        },
+        include: {
+            _count: {
+                select: { trainees: true }
+            }
+        },
     })
 
     const passedSessions = await db.session.findMany({
@@ -21,7 +26,12 @@ const Home = async () => {
             endDate: {
                 lt: yesterday
             }
-        }
+        },
+        include: {
+            _count: {
+                select: { trainees: true }
+            }
+        },
     })
 
     const activeSessions = await db.session.findMany({
@@ -30,7 +40,12 @@ const Home = async () => {
                 { startDate: { lte: now } }, // Start date is less than or equal to current date
                 { endDate: { gte: now } }   // End date is greater than or equal to current date
             ]
-        }
+        },
+        include: {
+            _count: {
+                select: { trainees: true }
+            }
+        },
     });
 
     return (

@@ -29,16 +29,16 @@ const SessionCollection = ({
     return (
         <>
         {sessions.length > 0 ? (
-            <Table>
+            <Table className="">
                 <TableHeader>
                     <TableRow>
                         <TableHead className="w-[200px]">Session</TableHead>
-                        <TableHead className="hidden md:table-cell">Start Date</TableHead>
-                        <TableHead className="hidden md:table-cell">End Date</TableHead>
-                        <TableHead className="hidden md:table-cell">Places</TableHead>
+                        <TableHead className="hidden lg:table-cell">Start Date</TableHead>
+                        <TableHead className="hidden lg:table-cell">End Date</TableHead>
+                        <TableHead className="hidden lg:table-cell w-[150px]">Places</TableHead>
+                        <TableHead className="">Progress</TableHead>
                         {!home && (
                             <>
-                            <TableHead className="w-[150px]">Places</TableHead>
                             <TableHead>Status</TableHead>
                             </>
                         )}
@@ -48,16 +48,16 @@ const SessionCollection = ({
                 {sessions.map((session) => (
                     <TableRow className="cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800" onClick={() => { router.push(`/sessions/${session.id}`) }} key={session.id}>
                         <TableCell className="font-semibold">{session.name}</TableCell>
-                        <TableCell className="hidden md:table-cell">{formatDateTime(session.startDate)}</TableCell>
-                        <TableCell className="hidden md:table-cell">{formatDateTime(session.endDate)}</TableCell>
-                        <TableCell className="hidden md:table-cell"><Badge className="bg-emerald-700 text-white">{session.places}</Badge></TableCell>
+                        <TableCell className="hidden lg:table-cell">{formatDateTime(session.startDate)}</TableCell>
+                        <TableCell className="hidden lg:table-cell">{formatDateTime(session.endDate)}</TableCell>
+                        <TableCell className="hidden lg:table-cell"><Badge className="bg-emerald-700 text-white">{session.places}</Badge></TableCell>
+                        <TableCell>
+                            <ProgressBar 
+                                session={session}
+                            />
+                        </TableCell>
                         {!home && (
                             <>
-                            <TableCell>
-                                <ProgressBar 
-                                    session={session}
-                                />
-                            </TableCell>
                             <TableCell>
                             {session.places === session._count["trainees"] ? (
                                 <Badge className="bg-red-500 text-white">Full</Badge>

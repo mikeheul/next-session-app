@@ -3,9 +3,11 @@ import { db } from "@/lib/db";
 import { ChevronLeftIcon } from "lucide-react";
 import Link from "next/link";
 import SessionCollection from "./_components/SessionCollection";
+import ProgressBar from "./_components/ProgressBar";
+import { formatDateTime } from "@/lib/format-datetime";
 
 const TrainingPage = async ({ params }: { params: { trainingId: string } }) => {
-    
+
     const training = await db.training.findUnique({
         where: {
             id: params.trainingId
@@ -38,11 +40,22 @@ const TrainingPage = async ({ params }: { params: { trainingId: string } }) => {
             </Link>
 
             <h1 className="text-2xl font-extrabold my-5">{training?.name}</h1>
-            <div className="flex flex-col gap-y-2">
+            <div className="hidden md:flex flex-col gap-y-2">
                 <SessionCollection
                     sessions={sessions}
                     home={false}
                 />
+            </div>
+            <div className="flex flex-col gap-y-5 md:hidden mt-5">
+                {sessions.map((session) => (
+                    <Link href={`/sessions/${session.id}`} key={session.id} className="flex flex-col items-center justify-center w-full gap-y-4 p-6 border border-slate-800 bg-slate-900 hover:bg-slate-800 cursor-pointer rounded-lg">
+                        <p className="text-xl font-semibold">{session.name}</p>
+                        <p>{formatDateTime(session.startDate)} to {formatDateTime(session.endDate)}</p>
+                        <ProgressBar 
+                            session={session}
+                        />
+                    </Link>
+                ))}
             </div>
         </div>
     );
