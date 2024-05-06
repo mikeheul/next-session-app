@@ -76,7 +76,7 @@ const SessionPage = async ({ params }: { params: { sessionId: string } }) => {
             </Link>
 
             <h1 className="text-2xl font-extrabold my-5">{session.name}</h1> 
-            <div className="bg-slate-200 p-6 rounded-md dark:text-slate-200 dark:bg-slate-900">
+            <div className="bg-slate-200 p-6 rounded-md dark:text-slate-200 dark:bg-slate-800">
                 <p>Start Date : {formatDateTime(session.startDate)}</p>
                 <p>End Date : {formatDateTime(session.endDate)}</p>
                 <p>Places : {session.places} places</p>

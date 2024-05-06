@@ -3,8 +3,9 @@ export const formatDateTime = (datetime?: Date) => {
         'en-US',
         {
             year: 'numeric',
-            month: '2-digit',
+            month: 'long',
             day: '2-digit',
+            weekday: 'long'
         }
     ).format(datetime)
 }
