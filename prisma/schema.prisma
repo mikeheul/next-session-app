@@ -32,39 +32,39 @@ model Trainer {
     updatedAt DateTime @updatedAt
 }
 
-model Trainee {
-    id String @id @default(uuid())
-    firstName String 
-    lastName String
-    email String @unique
-    phoneNumber String
+    model Trainee {
+        id String @id @default(uuid())
+        firstName String 
+        lastName String
+        email String @unique
+        phoneNumber String
 
-    sessions SessionsTrainees[]
+        sessions SessionsTrainees[]
 
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-}
+        createdAt DateTime @default(now())
+        updatedAt DateTime @updatedAt
+    }
 
-model Session {
-    id String @id @default(uuid())
-    name String
-    startDate DateTime @default(now())
-    endDate DateTime @default(now())
-    places Int @default(1)
+    model Session {
+        id String @id @default(uuid())
+        name String
+        startDate DateTime @default(now())
+        endDate DateTime @default(now())
+        places Int @default(1)
 
-    trainingId String
-    training Training @relation(fields: [trainingId], references: [id], onDelete: Cascade)
+        trainingId String
+        training Training @relation(fields: [trainingId], references: [id], onDelete: Cascade)
 
-    trainees SessionsTrainees[]
+        trainees SessionsTrainees[]
 
-    trainerId String
-    trainer Trainer @relation(fields: [trainerId], references: [id], onDelete: Cascade)
-    
-    programmes Programme[]
+        trainerId String
+        trainer Trainer @relation(fields: [trainerId], references: [id], onDelete: Cascade)
+        
+        programmes Programme[]
 
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-}
+        createdAt DateTime @default(now())
+        updatedAt DateTime @updatedAt
+    }
 
 model Category {
     id String @id @default(uuid())
