@@ -5,6 +5,9 @@ import SubscribeButton from "./_components/SubscribeButton";
 import Banner from "@/components/Banner";
 import Frame from "./_components/Frame";
 import FrameRow from "./_components/FrameRow";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { ChevronLeftIcon } from "lucide-react";
 
 const SessionPage = async ({ params }: { params: { sessionId: string } }) => {
     
@@ -65,6 +68,13 @@ const SessionPage = async ({ params }: { params: { sessionId: string } }) => {
 
     return (
         <>
+            <Link href={`/trainings/${session.trainingId}`}>
+                <Button>
+                    <ChevronLeftIcon />
+                    Back
+                </Button>
+            </Link>
+
             <h1 className="text-2xl font-extrabold my-5">{session.name}</h1> 
             <div className="bg-slate-200 p-6 rounded-md">
                 <p>Start Date : {formatDateTime(session.startDate)}</p>

@@ -1,5 +1,6 @@
 import { db } from "@/lib/db";
 import { Training } from "@prisma/client";
+import Link from "next/link";
 
 const TrainingsPage = async () => {
     
@@ -15,10 +16,12 @@ const TrainingsPage = async () => {
     
     return (
         <div>
-            <h1 className="text-2xl font-bold">Trainings</h1>
+            <h1 className="text-2xl font-extrabold my-5">Trainings</h1>
             {trainings.map((training: Training) => (
                 <div key={training.id}>
-                    {training.name}
+                    <Link href={`/trainings/${training.id}`}>
+                        {training.name}
+                    </Link> 
                 </div>
             ))}
         </div>
