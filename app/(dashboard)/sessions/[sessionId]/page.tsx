@@ -100,11 +100,12 @@ const SessionPage = async ({ params }: { params: { sessionId: string } }) => {
                 <Frame
                     label="Not Registered Trainees"
                 >
-                    {traineesNotInSession.length > 0 ? (
+                    {session.places > session.trainees.length ? (
                         <>
-                        {traineesNotInSession.map((trainee) => (
-                            <div className="flex flex-col xs:flex-row gap-y-2 items-center" key={trainee.id}>
-                                {session.places > session.trainees.length ? (
+                        {traineesNotInSession.length > 0 ? (
+                            <>
+                            {traineesNotInSession.map((trainee) => (
+                                <div className="flex flex-col xs:flex-row gap-y-2 items-center" key={trainee.id}>
                                     <>
                                         <SubscribeButton 
                                             traineeId={trainee.id}
@@ -112,16 +113,17 @@ const SessionPage = async ({ params }: { params: { sessionId: string } }) => {
                                         />
                                         <p>{`${trainee.firstName} ${trainee.lastName}`}</p>
                                     </>
-                                ) : (
-                                    <Banner 
-                                        label="No places available. Session complete !"
-                                    />
-                                )}
-                            </div>
-                        ))}
+                                </div>
+                            ))}
+                            </>
+                        ) : (
+                            <p className="text-sm text-slate-400">No trainees available</p>
+                        )}
                         </>
                     ) : (
-                        <p className="text-sm text-slate-400">No trainees</p>
+                        <Banner 
+                            label="No places available. Session complete !"
+                        />
                     )}
                 </Frame>
             </FrameRow>
