@@ -2,16 +2,6 @@ import { Button } from "@/components/ui/button";
 import { db } from "@/lib/db";
 import { ChevronLeftIcon } from "lucide-react";
 import Link from "next/link";
-import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-} from "@/components/ui/table"
-import { formatDateTime } from "@/lib/format-datetime";
-import { useRouter } from "next/navigation";
 import SessionCollection from "./_components/SessionCollection";
 
 const TrainingPage = async ({ params }: { params: { trainingId: string } }) => {

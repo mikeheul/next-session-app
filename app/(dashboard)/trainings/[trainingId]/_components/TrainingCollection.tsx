@@ -8,8 +8,7 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
-import { formatDateTime } from "@/lib/format-datetime";
-import { Training } from "@prisma/client";
+
 import { useRouter } from "next/navigation";
 
 interface TrainingCollectionProps {

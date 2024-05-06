@@ -1,14 +1,4 @@
 import { db } from "@/lib/db";
-import { Training } from "@prisma/client";
-import Link from "next/link";
-import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-} from "@/components/ui/table"
 import TrainingCollection from "./[trainingId]/_components/TrainingCollection";
 
 const TrainingsPage = async () => {
