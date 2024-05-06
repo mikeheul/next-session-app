@@ -25,7 +25,7 @@ export default function RootLayout({
       <body className={openSans.className}>
         <ToastProvider />
           <nav className="bg-cyan-900">
-            <ul className="flex gap-x-4 p-8">
+            <ul className="flex gap-x-4 p-8 text-white">
               <li><a href="/home">Home</a></li>
               <li><a href="/trainings">Trainings</a></li>
               <li><a href="/trainees">Trainees</a></li>

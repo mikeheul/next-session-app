@@ -48,7 +48,7 @@ const TrainingPage = async ({ params }: { params: { trainingId: string } }) => {
             </div>
             <div className="flex flex-col gap-y-5 md:hidden mt-5">
                 {sessions.map((session) => (
-                    <Link href={`/sessions/${session.id}`} key={session.id} className="flex flex-col items-center justify-center w-full gap-y-4 p-6 border border-slate-800 bg-slate-900 hover:bg-slate-800 cursor-pointer rounded-lg">
+                    <Link href={`/sessions/${session.id}`} key={session.id} className="flex flex-col items-center justify-center w-full gap-y-4 p-6 border bg-slate-100 hover:bg-slate-300 dark:border-slate-800 dark:bg-slate-900 dark:hover:bg-slate-800 cursor-pointer rounded-lg">
                         <p className="text-xl font-semibold">{session.name}</p>
                         <p>{formatDateTime(session.startDate)} to {formatDateTime(session.endDate)}</p>
                         <ProgressBar 
