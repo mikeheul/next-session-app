@@ -7,7 +7,8 @@ import Frame from "./_components/Frame";
 import FrameRow from "./_components/FrameRow";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { ChevronLeftIcon } from "lucide-react";
+import { ChevronLeftIcon, User2Icon } from "lucide-react";
+import TraineeButton from "../../trainees/[traineeId]/_components/TraineeButton";
 
 const SessionPage = async ({ params }: { params: { sessionId: string } }) => {
     
@@ -22,7 +23,7 @@ const SessionPage = async ({ params }: { params: { sessionId: string } }) => {
                         select: {
                             id: true,
                             firstName: true,
-                            lastName: true // Only include necessary fields
+                            lastName: true,
                         }
                     }
                 }
@@ -91,12 +92,17 @@ const SessionPage = async ({ params }: { params: { sessionId: string } }) => {
                     {session.trainees.length > 0 ? (
                         <>
                         {session.trainees.map((subscription) => (
-                            <div className="flex flex-col xs:flex-row gap-y-2 items-center" key={subscription.id}>
+                            <div className="flex flex-col sm:flex-row gap-y-2 items-center" key={subscription.id}>
                                 {subscription && (
+                                    <>
                                     <UnsubscribeButton 
-                                        traineeId={subscription.trainee.id}
+                                        traineeId={subscription.traineeId}
                                         sessionId={subscription.sessionId}
                                     />
+                                    <TraineeButton
+                                        traineeId={subscription.traineeId}
+                                    />
+                                    </>
                                 )}
                                 <p className="text-center xs:text-left">{`${subscription.trainee.firstName} ${subscription.trainee.lastName}`}</p>
                             </div>
@@ -115,11 +121,14 @@ const SessionPage = async ({ params }: { params: { sessionId: string } }) => {
                         {traineesNotInSession.length > 0 ? (
                             <>
                             {traineesNotInSession.map((trainee) => (
-                                <div className="flex flex-col xs:flex-row gap-y-2 items-center" key={trainee.id}>
+                                <div className="flex flex-col sm:flex-row gap-y-2 items-center" key={trainee.id}>
                                     <>
                                         <SubscribeButton 
                                             traineeId={trainee.id}
                                             sessionId={session.id}
+                                        />
+                                        <TraineeButton
+                                            traineeId={trainee.id}
                                         />
                                         <p className="text-center xs:text-left">{`${trainee.firstName} ${trainee.lastName}`}</p>
                                     </>
@@ -143,7 +152,7 @@ const SessionPage = async ({ params }: { params: { sessionId: string } }) => {
                     label="Registered Courses"
                 >
                     {session.programmes.map((programme) => (
-                        <div key={programme.id} className="flex flex-col xs:flex-row gap-y-2 items-center">
+                        <div key={programme.id} className="flex flex-col sm:flex-row gap-y-2 items-center">
                             <Button className="mr-0 xs:mr-5">
                                 Cancel
                             </Button>

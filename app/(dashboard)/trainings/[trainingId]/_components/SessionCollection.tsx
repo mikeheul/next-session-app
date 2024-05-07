@@ -13,6 +13,7 @@ import {
 import { formatDateTime } from "@/lib/format-datetime";
 import { useRouter } from "next/navigation";
 import ProgressBar from "./ProgressBar";
+import { cn } from "@/lib/utils";
 
 interface SessionCollectionProps {
     sessions: any[],
@@ -32,11 +33,11 @@ const SessionCollection = ({
             <Table className="">
                 <TableHeader>
                     <TableRow>
-                        <TableHead className="w-[200px]">Session</TableHead>
+                        <TableHead className="w-[300px]">Session</TableHead>
                         <TableHead className="hidden lg:table-cell">Start Date</TableHead>
                         <TableHead className="hidden lg:table-cell">End Date</TableHead>
                         <TableHead className="hidden lg:table-cell w-[150px]">Places</TableHead>
-                        <TableHead className="">Progress</TableHead>
+                        <TableHead className={cn({ 'hidden sm:table-cell': home })}>Progress</TableHead>
                         {!home && (
                             <>
                             <TableHead>Status</TableHead>
@@ -51,7 +52,7 @@ const SessionCollection = ({
                         <TableCell className="hidden lg:table-cell">{formatDateTime(session.startDate)}</TableCell>
                         <TableCell className="hidden lg:table-cell">{formatDateTime(session.endDate)}</TableCell>
                         <TableCell className="hidden lg:table-cell"><Badge className="bg-emerald-700 text-white">{session.places}</Badge></TableCell>
-                        <TableCell>
+                        <TableCell className={cn({ 'hidden sm:table-cell': home })}>
                             <ProgressBar 
                                 session={session}
                             />

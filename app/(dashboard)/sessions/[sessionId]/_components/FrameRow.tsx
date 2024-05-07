@@ -8,7 +8,7 @@ const FrameRow = ({
     children
 }: FrameRowProps) => {
     return (
-        <div className="flex flex-col gap-x-2 gap-y-2 md:flex-row my-2">
+        <div className="flex flex-col gap-x-2 gap-y-2 sm:flex-row my-2">
             {children}
         </div>
     );

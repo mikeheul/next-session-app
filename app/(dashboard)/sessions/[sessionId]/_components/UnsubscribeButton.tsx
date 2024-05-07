@@ -38,7 +38,7 @@ const UnsubscribeButton = ({
     }
 
     return (
-        <Button onClick={unsubscribe} className="text-white mr-0 xs:mr-5 bg-red-600 hover:bg-red-600/90">
+        <Button onClick={unsubscribe} className="text-white mr-0 xs:mr-2 bg-red-600 hover:bg-red-600/90">
             <UserRoundMinusIcon size={20} className="mr-2" /> 
             Unsubscribe
         </Button>

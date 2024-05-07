@@ -12,7 +12,7 @@ const Frame = ({
     return (
         <div className="basis-2/4 border border-slate-200 p-6 rounded-md dark:border-none dark:bg-slate-900">
             <h2 className="text-xl text-center xs:text-left font-semibold">{label}</h2>
-            <div className="flex flex-col gap-y-1 mt-6">
+            <div className="flex flex-col gap-y-8 md:gap-y-1 mt-6">
                 {children}
             </div>
         </div>
